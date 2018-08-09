@@ -1,32 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Contact from './Contact';
+import { Consumer } from '../context';
 
 class Contacts extends Component {
-  constructor() {
-    super();
-    this.state = {
-      contacts: [
-        {
-          id: 1,
-          name: 'Shashi Kashyap',
-          email: 'shashi@gmail.com',
-          phone: '555-555-5555'
-        },
-        {
-          id: 2,
-          name: 'Ravi Singh',
-          email: 'ravi@gmail.com',
-          phone: '222-222-2222'
-        },
-        {
-          id: 3,
-          name: 'Abhay Rai',
-          email: 'abhay@gmail.com',
-          phone: '666-666-666'
-        }
-      ]
-    }
-  }
 
   deleteContact = (id) => {
     const { contacts } = this.state;
@@ -36,18 +12,23 @@ class Contacts extends Component {
   }
 
   render() {
-    const { contacts } = this.state;
-
     return (
-      <Fragment>
-        { contacts.map(contact => (
-          <Contact
-            key={ contact.id }
-            contact={ contact }
-            deleteClickHandler={ this.deleteContact.bind(this, contact.id) }
-          />
-        )) }
-      </Fragment>
+      <Consumer>
+        { value => {
+          const { contacts } = value;
+          return (
+            <Fragment>
+              { contacts.map(contact => (
+                <Contact
+                  key={ contact.id }
+                  contact={ contact }
+                  deleteClickHandler={ this.deleteContact.bind(this, contact.id) }
+                />
+              )) }
+            </Fragment>
+          );
+        } }
+      </Consumer>
     );
   }
 }
