@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 
 class AddContact extends Component {
-  state = {
-    name: '',
-    email: '',
-    phone: ''
+  constructor(props) {
+    super(props);
+
+    this.nameInput = React.createRef();
+    this.emailInput = React.createRef();
+    this.phoneInput = React.createRef();
+  }
+
+  static defaultProps = {
+    name: 'Shashi Kashyap',
+    email: 'shashi@gmail.com',
+    phone: '777-777-7777'
   }
 
   onSubmit = e => {
@@ -12,10 +20,10 @@ class AddContact extends Component {
     console.log(this.state);
   }
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  // onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone } = this.props;
     return (
       <div className="card mb-3">
         <div className="card-header">
@@ -30,8 +38,8 @@ class AddContact extends Component {
                 name="name"
                 className="form-control form-control-lg"
                 placeholder="Enter name"
-                value={ name }
-                onChange={ this.onChange }
+                defaultValue={ name }
+                ref={ this.nameInput }
               />
             </div>
             <div className="form-group">
@@ -41,8 +49,8 @@ class AddContact extends Component {
                 name="email"
                 className="form-control form-control-lg"
                 placeholder="Enter email"
-                value={ email }
-                onChange={ this.onChange }
+                defaultValue={ email }
+                ref={ this.emailInput }
               />
             </div>
             <div className="form-group">
@@ -52,8 +60,8 @@ class AddContact extends Component {
                 name="phone"
                 className="form-control form-control-lg"
                 placeholder="Enter phone"
-                value={ phone }
-                onChange={ this.onChange }
+                defaultValue={ phone }
+                ref={ this.phoneInput }
               />
             </div>
             <input type="submit" value="Add Contact" className="btn btn-block btn-light"/>
