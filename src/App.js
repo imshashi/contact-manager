@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Contacts from './components/contacts/Contacts';
 import AddContact from './components/contacts/AddContact';
@@ -7,6 +7,7 @@ import EditContact from './components/contacts/EditContact';
 import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
 import Header from './components/layout/Header';
+import Test from './components/test/Test';
 
 import { Provider } from './context';
 
