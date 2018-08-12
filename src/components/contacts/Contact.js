@@ -12,9 +12,14 @@ class Contact extends Component {
     this.setState({ showContactInfo: !this.state.showContactInfo })
   }
 
-  onDeleteClick = (id, dispatch, e) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then(res => dispatch({ type: 'DELETE_CONTACT', payload: id }));
+  onDeleteClick = async (id, dispatch, e) => {
+    try{
+      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+      dispatch({ type: 'DELETE_CONTACT', payload: id });
+    } catch (e) {
+      // just to avoid 404 error from json placeholder as it won't find added contact
+      dispatch({ type: 'DELETE_CONTACT', payload: id });
+    }
   }
 
   render() {
